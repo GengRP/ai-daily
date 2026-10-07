@@ -1,7 +1,7 @@
 ---
 title: KOUHEI's AI Daily
 ---
-[日本語](/ai-daily/jp/) ｜ [中文](/ai-daily/cn/) ｜ **English**
+[日本語](/jp/) ｜ [中文](/cn/) ｜ **English**
 
 What happened in AI today, in one or two lines each — and **why it matters to you**.
 
@@ -9,7 +9,7 @@ Follow：X [@SuperKOUHEi001](https://x.com/SuperKOUHEi001) · GitHub [ai-starter
 
 ## 📅 By date
 
-- [2026-10-07](/ai-daily/en/2026-10-07)
+- [2026-10-07](/en/2026-10-07)
 
 ---
 > ⚠️ Compiled by an AI assistant from public AI news roundups; original articles are not individually verified. For reference only.
