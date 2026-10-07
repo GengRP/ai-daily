@@ -1,3 +1,48 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+
+// —— AI 日报：每条新闻 = 编号标题 + 解释 + 启发卡 ——
+article {
+  counter-reset: news;
+}
+article > h3 {
+  counter-increment: news;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 2.2rem 0 0.5rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--lightgray);
+  font-size: 1.2rem;
+  line-height: 1.45;
+}
+article > h3:first-of-type {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 1rem;
+}
+article > h3::before {
+  content: counter(news, decimal-leading-zero);
+  flex: none;
+  font-family: var(--codeFont);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--secondary);
+  min-width: 1.8rem;
+}
+article > h3 + p {
+  margin: 0 0 0.75rem 2.4rem;
+  color: var(--darkgray);
+  line-height: 1.75;
+}
+article > h3 ~ .callout[data-callout="tip"] {
+  margin-left: 2.4rem;
+  margin-bottom: 0;
+}
+@media (max-width: 600px) {
+  article > h3 + p,
+  article > h3 ~ .callout[data-callout="tip"] {
+    margin-left: 0;
+  }
+}
