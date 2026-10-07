@@ -46,3 +46,14 @@ article > h3 ~ .callout[data-callout="tip"] {
     margin-left: 0;
   }
 }
+
+// 启发卡：只保留高光底色，不显示标题
+article > .callout[data-callout="tip"] {
+  padding: 0.6rem 1rem;
+  > .callout-title {
+    display: none;
+  }
+  > .callout-content > p {
+    margin: 0;
+  }
+}
