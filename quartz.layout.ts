@@ -8,6 +8,7 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [],
   footer: Component.Footer({
     links: {
+      "KOUHEI AI": "https://gengrp.github.io/",
       "X @SuperKOUHEi001": "https://x.com/SuperKOUHEi001",
       "AI 入门实践指南": "https://github.com/GengRP/ai-starter-guide",
     },
@@ -17,6 +18,7 @@ export const sharedPageComponents: SharedLayout = {
 // components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
+    Component.MobileOnly(Component.HomeLink()),
     Component.ConditionalRender({
       component: Component.Breadcrumbs(),
       condition: (page) => page.fileData.slug !== "index",
@@ -26,6 +28,7 @@ export const defaultContentPageLayout: PageLayout = {
     Component.TagList(),
   ],
   left: [
+    Component.DesktopOnly(Component.HomeLink()),
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Flex({
@@ -49,8 +52,9 @@ export const defaultContentPageLayout: PageLayout = {
 
 // components for pages that display lists of pages  (e.g. tags or folders)
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
+  beforeBody: [Component.MobileOnly(Component.HomeLink()), Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
   left: [
+    Component.DesktopOnly(Component.HomeLink()),
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Flex({
