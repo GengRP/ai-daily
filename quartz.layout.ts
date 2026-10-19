@@ -19,13 +19,9 @@ export const sharedPageComponents: SharedLayout = {
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
     Component.MobileOnly(Component.HomeLink()),
-    Component.ConditionalRender({
-      component: Component.Breadcrumbs(),
-      condition: (page) => page.fileData.slug !== "index",
-    }),
+    // 苹果风：去掉面包屑和标签，标题下面直接是正文
     Component.ArticleTitle(),
     Component.ContentMeta(),
-    Component.TagList(),
   ],
   left: [
     Component.DesktopOnly(Component.HomeLink()),
@@ -41,18 +37,32 @@ export const defaultContentPageLayout: PageLayout = {
         { Component: Component.ReaderMode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      title: "",
+      folderDefaultState: "open",
+      useSavedState: false,
+      // 只显示当前语言的日期；首页 index 属于日语版。函数在浏览器里运行，所以可以读 body 的 slug。
+      filterFn: (node) => {
+        const seg = (document.body.dataset.slug || "index").split("/")[0]
+        const lang = seg === "cn" || seg === "en" ? seg : "jp"
+        const top = node.slug.split("/")[0]
+        return node.slugSegment !== "tags" && top === lang
+      },
+      // 文件只显示日期（文件名），不显示「AI 日报 …」整个标题
+      mapFn: (node) => {
+        if (!node.isFolder && node.slugSegment) node.displayName = node.slugSegment
+      },
+      // 新的日期在上面
+      sortFn: (a, b) => b.displayName.localeCompare(a.displayName, undefined, { numeric: true }),
+    }),
   ],
-  right: [
-    Component.Graph(),
-    Component.DesktopOnly(Component.TableOfContents()),
-    Component.Backlinks(),
-  ],
+  // 关系图和反向链接（只会列出其他语言版本）去掉，只留本页目录
+  right: [Component.DesktopOnly(Component.TableOfContents())],
 }
 
 // components for pages that display lists of pages  (e.g. tags or folders)
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.MobileOnly(Component.HomeLink()), Component.Breadcrumbs(), Component.ArticleTitle(), Component.ContentMeta()],
+  beforeBody: [Component.MobileOnly(Component.HomeLink()), Component.ArticleTitle(), Component.ContentMeta()],
   left: [
     Component.DesktopOnly(Component.HomeLink()),
     Component.PageTitle(),
@@ -66,7 +76,24 @@ export const defaultListPageLayout: PageLayout = {
         { Component: Component.Darkmode() },
       ],
     }),
-    Component.Explorer(),
+    Component.Explorer({
+      title: "",
+      folderDefaultState: "open",
+      useSavedState: false,
+      // 只显示当前语言的日期；首页 index 属于日语版。函数在浏览器里运行，所以可以读 body 的 slug。
+      filterFn: (node) => {
+        const seg = (document.body.dataset.slug || "index").split("/")[0]
+        const lang = seg === "cn" || seg === "en" ? seg : "jp"
+        const top = node.slug.split("/")[0]
+        return node.slugSegment !== "tags" && top === lang
+      },
+      // 文件只显示日期（文件名），不显示「AI 日报 …」整个标题
+      mapFn: (node) => {
+        if (!node.isFolder && node.slugSegment) node.displayName = node.slugSegment
+      },
+      // 新的日期在上面
+      sortFn: (a, b) => b.displayName.localeCompare(a.displayName, undefined, { numeric: true }),
+    }),
   ],
   right: [],
 }

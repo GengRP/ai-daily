@@ -58,9 +58,180 @@ article > .callout[data-callout="tip"] {
   }
 }
 
+// —— 苹果风 ——
+// 字体：苹果设备用系统字体，其他设备回落到 Noto
+:root {
+  --headerFont: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --bodyFont: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.04), 0 6px 20px rgb(0 0 0 / 0.06);
+}
 // 中文页面用简体中文字形
 body[data-slug^="cn/"] {
-  --headerFont: "Noto Sans SC", "Noto Sans JP", sans-serif;
-  --bodyFont: "Noto Sans SC", "Noto Sans JP", sans-serif;
+  --headerFont: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", "PingFang SC", "Noto Sans SC", "Noto Sans JP", sans-serif;
+  --bodyFont: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Noto Sans SC", "Noto Sans JP", sans-serif;
+}
+body {
   font-family: var(--bodyFont);
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+
+// 大标题
+h1.article-title {
+  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin: 1.5rem 0 0.5rem;
+}
+.page-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+// 语言切换：正文第一行做成分段按钮（隐藏「｜」分隔符）
+article > p:first-child:has(> a, > strong) {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  margin: 0 0 1.5rem;
+  border-radius: 999px;
+  background: var(--lightgray);
+  font-size: 0;
+  > a,
+  > strong {
+    font-size: 0.8125rem;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    line-height: 1.4;
+    color: var(--darkgray);
+    background: transparent;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  > a:hover {
+    color: var(--dark);
+  }
+  > strong {
+    background: var(--light);
+    color: var(--dark);
+    box-shadow: 0 1px 3px rgb(0 0 0 / 0.15);
+  }
+}
+
+// 新闻条目：编号用蓝色，标题更大
+article > h3 {
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-top: 2.75rem;
+  padding-top: 2rem;
+  border-top-color: var(--lightgray);
+}
+article > h3::before {
+  font-family: var(--headerFont);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--tertiary);
+}
+article > h3 + p {
+  font-size: 1.0625rem;
+  color: var(--darkgray);
+}
+// 启发卡：大圆角浅蓝底
+article > .callout[data-callout="tip"] {
+  --color: var(--secondary);
+  --border: transparent;
+  --bg: var(--highlight);
+  border: none;
+  border-radius: 14px;
+  padding: 0.85rem 1.15rem;
+  color: var(--dark);
+}
+
+// 首页小标题
+article > h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 3rem;
+}
+
+// 链接：蓝色，悬停才有下划线
+a.internal,
+a.external {
+  background-color: transparent;
+  color: var(--secondary);
+  padding: 0;
+  font-weight: 500;
+  &:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+// 搜索框做成圆角胶囊
+.search > .search-button {
+  border-radius: 999px;
+  background: var(--lightgray);
+  border: none;
+}
+
+// 侧栏：只剩当前语言的日期，隐藏语言文件夹那一行
+.explorer .folder-container {
+  display: none;
+}
+.explorer .folder-outer > ul {
+  padding-left: 0;
+  margin-left: 0;
+  border-left: none;
+}
+.explorer .explorer-content ul li > a {
+  display: block;
+  padding: 0.3rem 0.75rem;
+  border-radius: 8px;
+  color: var(--darkgray);
+  opacity: 1;
+  font-weight: 400;
+  transition: background-color 0.2s, color 0.2s;
+  &:hover {
+    background: var(--lightgray);
+    color: var(--dark);
+    text-decoration: none;
+  }
+  &.active {
+    background: var(--highlight);
+    color: var(--secondary);
+    font-weight: 600;
+  }
+}
+
+// 侧栏顶部的折叠箭头（标题为空时只剩一个箭头）不需要
+.explorer button.desktop-explorer {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  h1.article-title {
+    font-size: 2rem;
+  }
+  article > h3 {
+    font-size: 1.1875rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+  }
+}
+
+// 页脚
+footer {
+  font-size: 0.8125rem;
+  color: var(--gray);
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
 }
