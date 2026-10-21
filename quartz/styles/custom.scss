@@ -235,3 +235,33 @@ footer {
     transition: none !important;
   }
 }
+
+// 新闻标题 = 原文链接：平时和标题一样黑，悬停/键盘聚焦时变蓝加下划线；新标签打开
+article > h3 > a.external {
+  color: inherit;
+  font-weight: inherit;
+  background: none;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  cursor: pointer;
+  &:hover,
+  &:focus-visible {
+    color: var(--secondary);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  &:focus-visible {
+    outline: 2px solid var(--secondary);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .external-icon {
+    height: 0.7em;
+    margin-left: 0.25em;
+    opacity: 0.45;
+  }
+}
+// 标题自带的「本节锚点」链接藏起来，免得和原文链接混在一起
+article > h3 > a[role="anchor"] {
+  display: none;
+}
