@@ -13,7 +13,7 @@ const HomeLink: QuartzComponent = ({ fileData, displayClass }: QuartzComponentPr
   const top = (fileData.slug ?? "").split("/")[0]
   const t = targets[top] ?? targets.jp
   return (
-    <a class={classNames(displayClass, "home-link")} href={t.href}>
+    <a class={classNames(displayClass, "home-link")} href={t.href} data-router-ignore>
       {t.label}
     </a>
   )

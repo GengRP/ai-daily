@@ -11,7 +11,8 @@ const isElement = (target: EventTarget | null): target is Element =>
 const isLocalUrl = (href: string) => {
   try {
     const url = new URL(href)
-    if (window.location.origin === url.origin) {
+    // 主页和日报同域（gengrp.github.io），只有 /ai-daily/ 下的链接走 SPA，否则主页会套上日报的样式
+    if (window.location.origin === url.origin && url.pathname.startsWith("/ai-daily/")) {
       return true
     }
   } catch (e) {}
