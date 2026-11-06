@@ -9,6 +9,7 @@ Follow：X [@SuperKOUHEi001](https://x.com/SuperKOUHEi001) · GitHub [ai-starter
 
 ## 📅 By date
 
+- [2026-11-07](/en/2026-11-07)
 - [2026-11-06](/en/2026-11-06)
 - [2026-11-05](/en/2026-11-05)
 - [2026-11-04](/en/2026-11-04)
