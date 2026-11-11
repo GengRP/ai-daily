@@ -1,0 +1,265 @@
+// 传统挂历
+.daily-calendar {
+  --paper: #fbf8f2;
+  --ink: #2b2620;
+  --ink-soft: #6f665b;
+  --rule: #e6dfd3;
+  --sun: #c8382e;
+  --sat: #2f62a8;
+  --accent: #c8382e;
+  --serif: "Hiragino Mincho ProN", "Songti SC", "Noto Serif JP", "Noto Serif SC", Georgia, "Times New Roman", serif;
+  position: relative;
+  margin: 2.5rem auto 1rem;
+  max-width: 760px;
+  padding: 2.75rem 2.25rem 2rem;
+  background: var(--paper);
+  color: var(--ink);
+  border-radius: 6px;
+  box-shadow:
+    0 1px 0 rgb(0 0 0 / 0.04),
+    0 2px 4px rgb(0 0 0 / 0.05),
+    0 18px 40px -12px rgb(60 40 20 / 0.22);
+}
+:root[saved-theme="dark"] .daily-calendar {
+  --paper: #22201c;
+  --ink: #ece6dc;
+  --ink-soft: #a39a8d;
+  --rule: #3a362f;
+  --sun: #ef6b5f;
+  --sat: #7fa6e0;
+  --accent: #ef6b5f;
+  box-shadow: 0 0 0 1px #34302a, 0 18px 40px -12px rgb(0 0 0 / 0.6);
+}
+
+// 顶部挂钩：两个吊环
+.daily-calendar .dc-hanger {
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 38%;
+  pointer-events: none;
+  span {
+    width: 14px;
+    height: 26px;
+    border-radius: 7px;
+    border: 3px solid #9b9387;
+    border-bottom-color: transparent;
+    background: transparent;
+  }
+}
+
+.daily-calendar .dc-page[hidden] {
+  display: none;
+}
+
+.daily-calendar .dc-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 1.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 2px solid var(--ink);
+}
+.daily-calendar .dc-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.daily-calendar .dc-month {
+  font-family: var(--serif);
+  font-size: 4.5rem;
+  line-height: 0.9;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: lining-nums;
+}
+.daily-calendar .dc-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.daily-calendar .dc-name {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+}
+.daily-calendar[data-lang="en"] .dc-name {
+  letter-spacing: 0.02em;
+}
+.daily-calendar .dc-year {
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+.daily-calendar .dc-flip {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background-color 0.2s, opacity 0.2s;
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--ink) 7%, transparent);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  &:disabled {
+    opacity: 0.25;
+    cursor: default;
+  }
+}
+
+.daily-calendar .dc-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+.daily-calendar .dc-wd,
+.daily-calendar .dc-cell {
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.daily-calendar .dc-wd {
+  padding: 0.5rem 0;
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--ink-soft);
+  &.sun {
+    color: var(--sun);
+  }
+  &.sat {
+    color: var(--sat);
+  }
+}
+.daily-calendar .dc-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-height: 92px;
+  padding: 0.5rem 0.55rem 0.55rem;
+  color: var(--ink);
+  font-weight: 400;
+  text-decoration: none;
+  background: transparent;
+  &.empty {
+    background: color-mix(in srgb, var(--ink) 2.5%, transparent);
+  }
+  .dc-day {
+    align-self: flex-start;
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    line-height: 1;
+    font-variant-numeric: lining-nums;
+  }
+  &.sun .dc-day {
+    color: var(--sun);
+  }
+  &.sat .dc-day {
+    color: var(--sat);
+  }
+  &.none .dc-day {
+    opacity: 0.35;
+  }
+  .dc-n {
+    position: absolute;
+    top: 0.55rem;
+    right: 0.55rem;
+    font-size: 0.6875rem;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .dc-first {
+    margin-top: auto;
+    font-size: 0.6875rem;
+    line-height: 1.35;
+    color: var(--ink-soft);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+// 有日报的日子：可点，悬停时纸面微微变深
+a.dc-cell.has {
+  cursor: pointer;
+  transition: background-color 0.2s;
+  &:hover {
+    background: color-mix(in srgb, var(--accent) 7%, transparent);
+    text-decoration: none;
+    .dc-first {
+      color: var(--ink);
+    }
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+}
+// 今天：日期数字画一个朱红圆圈（像在挂历上用笔圈出来）
+.daily-calendar .dc-cell.today .dc-day {
+  position: relative;
+  z-index: 0;
+  &::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    inset: -0.2em -0.28em -0.16em;
+    border: 1.5px solid var(--accent);
+    border-radius: 50%;
+    transform: rotate(-8deg);
+  }
+}
+
+@media (max-width: 700px) {
+  .daily-calendar {
+    padding: 2rem 0.75rem 1rem;
+  }
+  .daily-calendar .dc-month {
+    font-size: 3.25rem;
+  }
+  .daily-calendar .dc-cell {
+    min-height: 64px;
+    padding: 0.35rem;
+    .dc-day {
+      font-size: 1.125rem;
+    }
+    .dc-first {
+      display: none;
+    }
+    .dc-n {
+      position: static;
+      margin-top: auto;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .daily-calendar * {
+    transition: none !important;
+  }
+}
+
+// 首页：挂历代替日期列表，左侧日期列表和下方页面列表都不要
+body[data-slug="index"],
+body[data-slug="jp/index"],
+body[data-slug="cn/index"],
+body[data-slug="en/index"] {
+  .explorer,
+  .page-listing,
+  .content-meta {
+    display: none;
+  }
+}

@@ -5,7 +5,8 @@ import * as Component from "./quartz/components"
 export const sharedPageComponents: SharedLayout = {
   head: Component.Head(),
   header: [],
-  afterBody: [],
+  // 首页的挂历（只在首页和各语言首页显示）
+  afterBody: [Component.DailyCalendar()],
   footer: Component.Footer({
     links: {
       "KOUHEI AI": "https://gengrp.github.io/",
@@ -57,7 +58,7 @@ export const defaultContentPageLayout: PageLayout = {
     }),
   ],
   // 关系图和反向链接（只会列出其他语言版本）去掉，只留本页目录
-  right: [Component.DesktopOnly(Component.TableOfContents())],
+  right: [Component.DesktopOnly(Component.IssueGlance())],
 }
 
 // components for pages that display lists of pages  (e.g. tags or folders)

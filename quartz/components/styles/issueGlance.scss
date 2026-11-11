@@ -1,0 +1,254 @@
+// 本期速览（右侧栏）
+.issue-glance {
+  --c-product: #0a84ff;
+  --c-model: #5e5ce6;
+  --c-research: #30b0c7;
+  --c-security: #ff6b3d;
+  --c-law: #c69026;
+  --c-robot: #34c759;
+  --c-other: #8e8e93;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 1.25rem 1.1rem 1rem;
+  border-radius: 18px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.03), 0 8px 24px rgb(0 0 0 / 0.05);
+  font-size: 0.875rem;
+}
+.issue-glance .cat-product { --c: var(--c-product); }
+.issue-glance .cat-model { --c: var(--c-model); }
+.issue-glance .cat-research { --c: var(--c-research); }
+.issue-glance .cat-security { --c: var(--c-security); }
+.issue-glance .cat-law { --c: var(--c-law); }
+.issue-glance .cat-robot { --c: var(--c-robot); }
+.issue-glance .cat-other { --c: var(--c-other); }
+
+.issue-glance .ig-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.issue-glance .ig-date {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+  .ig-md {
+    font-family: var(--headerFont);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    color: var(--dark);
+    font-variant-numeric: tabular-nums;
+  }
+  .ig-wd {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--gray);
+  }
+}
+.issue-glance .ig-sub {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.3;
+  .ig-title {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  .ig-count {
+    font-weight: 600;
+    color: var(--darkgray);
+  }
+}
+
+// 分类色条 + 图例
+.issue-glance .ig-bar {
+  display: flex;
+  gap: 3px;
+  height: 6px;
+  > span {
+    border-radius: 3px;
+    background: var(--c);
+  }
+}
+.issue-glance .ig-legend {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.8rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  font-size: 0.75rem;
+  color: var(--darkgray);
+  > li {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+  i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--c);
+  }
+  b {
+    color: var(--dark);
+    font-weight: 600;
+  }
+}
+
+// 每条：编号 + 主角 + 类型·来源
+.issue-glance .ig-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  > li {
+    margin: 0;
+    position: relative;
+  }
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.45rem 0.55rem;
+    border-radius: 10px;
+    color: var(--darkgray);
+    font-weight: 400;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+    &:hover {
+      background: var(--lightgray);
+      color: var(--dark);
+      text-decoration: none;
+    }
+    &:focus-visible {
+      outline: 2px solid var(--secondary);
+      outline-offset: 1px;
+    }
+  }
+  .ig-num {
+    flex: none;
+    display: grid;
+    place-items: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--c);
+    background: color-mix(in srgb, var(--c) 12%, transparent);
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .ig-body {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    line-height: 1.3;
+  }
+  .ig-who {
+    font-weight: 600;
+    color: var(--dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .ig-meta {
+    font-size: 0.75rem;
+    color: var(--gray);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  li.is-current > a {
+    background: color-mix(in srgb, var(--c) 9%, transparent);
+    .ig-num {
+      color: #fff;
+      background: var(--c);
+    }
+  }
+  li.is-read:not(.is-current) .ig-who {
+    color: var(--gray);
+    font-weight: 500;
+  }
+}
+
+// 精简版：只有编号和主角，排紧一点
+.issue-glance.ig-compact .ig-list a {
+  padding: 0.3rem 0.5rem;
+}
+
+// 阅读进度
+.issue-glance .ig-progress {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  .ig-progress-bar {
+    --p: 0;
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--lightgray);
+    position: relative;
+    overflow: hidden;
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--secondary);
+      transform-origin: left;
+      transform: scaleX(var(--p));
+      transition: transform 0.3s ease;
+    }
+  }
+  .ig-progress-text {
+    font-size: 0.75rem;
+    color: var(--gray);
+    font-variant-numeric: tabular-nums;
+    b {
+      color: var(--dark);
+    }
+  }
+}
+
+// 上一期 / 下一期
+.issue-glance .ig-nav {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--lightgray);
+  a {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    padding: 0.35rem 0.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .issue-glance * {
+    transition: none !important;
+  }
+}
+// 卡片按内容高度，不被侧栏拉长
+.sidebar.right > .issue-glance {
+  flex: 0 0 auto;
+  margin-top: 0.5rem;
+}
+// 抵消全站 header / footer 的默认外边距
+.issue-glance > .ig-head {
+  margin: 0.25rem 0 0.35rem;
+}
+.issue-glance > .ig-nav {
+  margin: 0;
+}

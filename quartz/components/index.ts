@@ -25,7 +25,12 @@ import Comments from "./Comments"
 import Flex from "./Flex"
 import ConditionalRender from "./ConditionalRender"
 
+import IssueGlance from "./IssueGlance"
+import DailyCalendar from "./DailyCalendar"
+
 export {
+  IssueGlance,
+  DailyCalendar,
   ArticleTitle,
   Content,
   TagContent,
