@@ -3,6 +3,8 @@ import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } fro
 import { FullSlug, resolveRelative } from "../util/path"
 import style from "./styles/dailyCalendar.scss"
 import { entitiesOf } from "./IssueGlance"
+import { htmlToJsx } from "../util/jsx"
+import { FilePath } from "../util/path"
 // @ts-ignore
 import script from "./scripts/dailyCalendar.inline"
 
@@ -23,7 +25,7 @@ const UI: Record<Lang, { prev: string; next: string; items: (n: number) => strin
 }
 
 export default (() => {
-  const DailyCalendar: QuartzComponent = ({ fileData, allFiles }: QuartzComponentProps) => {
+  const DailyCalendar: QuartzComponent = ({ fileData, allFiles, tree }: QuartzComponentProps) => {
     const slug = fileData.slug ?? ""
     const m = slug.match(/^(?:(cn|jp|en)\/)?index$/)
     if (!m) return null
@@ -48,8 +50,12 @@ export default (() => {
       months.push([y, mo])
     }
     const latest = months.length - 1
+    // 首页介绍文字（去掉第一段语言切换）挪到挂历下面，让挂历顶边和左侧日期列表对齐
+    const body = ((tree as any).children ?? []).filter((n: any) => n.type === "element")
+    const intro = htmlToJsx(fileData.filePath as FilePath, { type: "root", children: body.slice(1) } as any)
 
     return (
+      <>
       <section class="daily-calendar" data-lang={lang} aria-label="calendar">
         <div class="dc-hanger" aria-hidden="true">
           <span />
@@ -115,6 +121,8 @@ export default (() => {
           )
         })}
       </section>
+      <div class="dc-intro">{intro}</div>
+      </>
     )
   }
   DailyCalendar.css = style

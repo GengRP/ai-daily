@@ -271,3 +271,34 @@ body[data-slug="en/index"] {
     display: none;
   }
 }
+
+// 首页：正文只留语言切换，介绍文字由挂历组件放到挂历下面
+body[data-slug="index"],
+body[data-slug="jp/index"],
+body[data-slug="cn/index"],
+body[data-slug="en/index"] {
+  .center article :is(p:not(:first-of-type), ul, h2, blockquote, hr),
+  .center > hr {
+    display: none;
+  }
+  .center article > p:first-child {
+    margin-bottom: 0;
+  }
+  .page-footer {
+    margin-top: 0;
+  }
+  // 挂历顶边和左侧日期列表第一行对齐（语言切换下沿到列表顶约 85px）
+  @media (min-width: 1200px) {
+    .daily-calendar {
+      margin-top: 85px;
+    }
+  }
+}
+.dc-intro {
+  margin: 2rem 0 0;
+  color: var(--darkgray);
+  font-size: 0.9375rem;
+  p {
+    margin: 0.4rem 0;
+  }
+}
