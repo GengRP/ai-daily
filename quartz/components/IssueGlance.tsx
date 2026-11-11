@@ -53,9 +53,14 @@ const LOCAL: Record<string, Partial<Record<Lang, string>>> = {
   SJTU: { cn: "上海交大", jp: "上海交通大学" },
   EU: { cn: "欧盟" },
 }
-const entityOf = (t: string, lang: Lang, href?: string) => {
+// 一条标题里的主角（挂历页也用）
+export const entitiesOf = (t: string, lang: Lang): string[] => {
   let hits = ENTITIES.filter(([re]) => re.test(t)).map(([, n]) => LOCAL[n]?.[lang] ?? n)
   if (!hits.length && /Claude/.test(t)) hits = ["Anthropic"]
+  return [...new Set(hits)]
+}
+const entityOf = (t: string, lang: Lang, href?: string) => {
+  const hits = entitiesOf(t, lang)
   const uniq = [...new Set(hits)].slice(0, 2)
   if (uniq.length) return uniq.join(" · ")
   return href ? domainOf(href) : ""
@@ -75,7 +80,7 @@ interface Options {
 }
 
 export default ((opts?: Partial<Options>) => {
-  const variant = opts?.variant ?? "full"
+  const variant = opts?.variant ?? "compact"
   const IssueGlance: QuartzComponent = ({ fileData, tree, allFiles, displayClass }: QuartzComponentProps) => {
     const slug = fileData.slug ?? ""
     const m = slug.match(/^(cn|jp|en)\/(\d{4}-\d{2}-\d{2})$/)

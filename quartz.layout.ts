@@ -58,7 +58,7 @@ export const defaultContentPageLayout: PageLayout = {
     }),
   ],
   // 关系图和反向链接（只会列出其他语言版本）去掉，只留本页目录
-  right: [Component.DesktopOnly(Component.IssueGlance())],
+  right: [Component.DesktopOnly(Component.IssueGlance({ variant: "compact" }))],
 }
 
 // components for pages that display lists of pages  (e.g. tags or folders)

@@ -2,6 +2,7 @@
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "./types"
 import { FullSlug, resolveRelative } from "../util/path"
 import style from "./styles/dailyCalendar.scss"
+import { entitiesOf } from "./IssueGlance"
 // @ts-ignore
 import script from "./scripts/dailyCalendar.inline"
 
@@ -29,13 +30,13 @@ export default (() => {
     const lang = (m[1] ?? "jp") as Lang
 
     // 这一语言所有日报：日期 → {条数, 第一条标题}
-    const issues = new Map<string, { n: number; first: string; slug: string }>()
+    const issues = new Map<string, { n: number; who: string[]; slug: string }>()
     for (const f of allFiles) {
       const s = f.slug ?? ""
       const d = s.match(new RegExp(`^${lang}/(\\d{4}-\\d{2}-\\d{2})$`))
       if (!d) continue
       const toc = (f.toc ?? []).filter((t) => t.depth >= 0)
-      issues.set(d[1], { n: toc.length, first: toc[0]?.text ?? "", slug: s })
+      issues.set(d[1], { n: toc.length, who: [...new Set(toc.flatMap((t) => entitiesOf(t.text, lang)))], slug: s })
     }
     if (!issues.size) return null
 
@@ -97,10 +98,15 @@ export default (() => {
                     )
                   }
                   return (
-                    <a class={`${cls} has internal`} data-date={key} href={resolveRelative(slug as FullSlug, it.slug as FullSlug)} title={it.first}>
+                    <a class={`${cls} has internal`} data-date={key} href={resolveRelative(slug as FullSlug, it.slug as FullSlug)} title={it.who.join(" · ")}>
                       <span class="dc-day">{day}</span>
                       <span class="dc-n">{UI[lang].items(it.n)}</span>
-                      <span class="dc-first">{it.first.replace(/^【[^】]+】|^\[[^\]]+\]\s*/, "")}</span>
+                      <span class="dc-who">
+                        {it.who.slice(0, 3).map((w) => (
+                          <span>{w}</span>
+                        ))}
+                        {it.who.length > 3 && <span class="dc-more">+{it.who.length - 3}</span>}
+                      </span>
                     </a>
                   )
                 })}
