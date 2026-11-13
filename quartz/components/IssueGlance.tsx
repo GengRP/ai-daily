@@ -48,7 +48,8 @@ const ENTITIES: [RegExp, string][] = [
   [/欧盟|\bEU\b/, "EU"], [/上海交|Shanghai Jiao/, "SJTU"], [/Nature Will/, "Nature Will"],
   [/Allen|AI2/, "Ai2"], [/美联航|United Airlines|ユナイテッド航空/, "United"],
   [/Spotify/, "Spotify"], [/Hermes/, "Hermes"], [/腾讯|テンセント|Tencent/, "Tencent"],
-  [/三星|サムスン|Samsung/, "Samsung"], [/Agile Robots/, "Agile Robots"],
+  [/三星|サムスン|Samsung/, "Samsung"], [/Agile Robots/, "Agile Robots"], [/\bAIE\b/, "AIE"], [/Edge0/, "Edge0"],
+  [/llama\.cpp/, "llama.cpp"],
 ]
 // 机构名按语言显示
 const LOCAL: Record<string, Partial<Record<Lang, string>>> = {
