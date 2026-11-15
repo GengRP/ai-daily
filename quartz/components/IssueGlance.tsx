@@ -50,7 +50,8 @@ const ENTITIES: [RegExp, string][] = [
   [/Spotify/, "Spotify"], [/Hermes/, "Hermes"], [/腾讯|テンセント|Tencent/, "Tencent"],
   [/三星|サムスン|Samsung/, "Samsung"], [/Agile Robots/, "Agile Robots"], [/\bAIE\b/, "AIE"], [/Edge0/, "Edge0"],
   [/llama\.cpp/, "llama.cpp"], [/Cursor/, "Cursor"], [/\bFAA\b/, "FAA"], [/Sierra/, "Sierra"],
-  [/阿里|アリババ|Alibaba/, "Alibaba"], [/特斯拉|テスラ|Tesla/, "Tesla"],
+  [/阿里|アリババ|Alibaba/, "Alibaba"], [/特斯拉|テスラ|Tesla/, "Tesla"], [/朝鲜|北朝鮮|North Korea/, "North Korea"],
+  [/Lovable/, "Lovable"], [/\bAlpha\b/, "Alpha School"], [/Hacker News/, "Hacker News"], [/公司 Foundation|の Foundation|maker Foundation|Foundation Robotics/, "Foundation"],
 ]
 // 机构名按语言显示
 const LOCAL: Record<string, Partial<Record<Lang, string>>> = {
@@ -59,6 +60,7 @@ const LOCAL: Record<string, Partial<Record<Lang, string>>> = {
   United: { cn: "美联航", jp: "ユナイテッド航空" },
   Tencent: { cn: "腾讯" }, Samsung: { cn: "三星" },
   Alibaba: { cn: "阿里巴巴" }, Tesla: { cn: "特斯拉" },
+  "North Korea": { cn: "朝鲜", jp: "北朝鮮" },
 }
 // 一条标题里的主角（挂历页也用）
 export const entitiesOf = (t: string, lang: Lang): string[] => {
