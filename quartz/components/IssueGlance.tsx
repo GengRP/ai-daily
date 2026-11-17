@@ -51,7 +51,7 @@ const ENTITIES: [RegExp, string][] = [
   [/三星|サムスン|Samsung/, "Samsung"], [/Agile Robots/, "Agile Robots"], [/\bAIE\b/, "AIE"], [/Edge0/, "Edge0"],
   [/llama\.cpp/, "llama.cpp"], [/Cursor/, "Cursor"], [/\bFAA\b/, "FAA"], [/Sierra/, "Sierra"],
   [/阿里|アリババ|Alibaba/, "Alibaba"], [/特斯拉|テスラ|Tesla/, "Tesla"], [/朝鲜|北朝鮮|North Korea/, "North Korea"],
-  [/Lovable/, "Lovable"], [/tiny-voca/, "tiny-voca"], [/哈佛|ハーバード|Harvard/, "Harvard"], [/\bAlpha\b/, "Alpha School"], [/Hacker News/, "Hacker News"], [/公司 Foundation|の Foundation|maker Foundation|Foundation Robotics/, "Foundation"],
+  [/Lovable/, "Lovable"], [/tiny-voca/, "tiny-voca"], [/Waymo/, "Waymo"], [/Java4Shell|Java の深刻|Java 高危|critical Java/, "Java4Shell"], [/哈佛|ハーバード|Harvard/, "Harvard"], [/\bAlpha\b/, "Alpha School"], [/Hacker News/, "Hacker News"], [/公司 Foundation|の Foundation|maker Foundation|Foundation Robotics/, "Foundation"],
 ]
 // 机构名按语言显示
 const LOCAL: Record<string, Partial<Record<Lang, string>>> = {
