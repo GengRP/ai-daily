@@ -52,6 +52,7 @@ const ENTITIES: [RegExp, string][] = [
   [/llama\.cpp/, "llama.cpp"], [/Cursor/, "Cursor"], [/\bFAA\b/, "FAA"], [/Sierra/, "Sierra"],
   [/阿里|アリババ|Alibaba/, "Alibaba"], [/特斯拉|テスラ|Tesla/, "Tesla"], [/朝鲜|北朝鮮|North Korea/, "North Korea"],
   [/Lovable/, "Lovable"], [/tiny-voca/, "tiny-voca"], [/Waymo/, "Waymo"], [/Java4Shell|Java の深刻|Java 高危|critical Java/, "Java4Shell"], [/哈佛|ハーバード|Harvard/, "Harvard"], [/\bAlpha\b/, "Alpha School"], [/Hacker News/, "Hacker News"], [/公司 Foundation|の Foundation|maker Foundation|Foundation Robotics/, "Foundation"], [/Genesis AI/, "Genesis AI"],
+  [/Chrome/, "Chrome"], [/3 家银行|3銀行|more US banks/, "US banks"], [/薯片|ポテトチップス|bag of chips/, "Omnilert"],
 ]
 // 机构名按语言显示
 const LOCAL: Record<string, Partial<Record<Lang, string>>> = {
@@ -61,6 +62,7 @@ const LOCAL: Record<string, Partial<Record<Lang, string>>> = {
   Tencent: { cn: "腾讯" }, Samsung: { cn: "三星" },
   Alibaba: { cn: "阿里巴巴" }, Tesla: { cn: "特斯拉" },
   "North Korea": { cn: "朝鲜", jp: "北朝鮮" },
+  "US banks": { cn: "美国银行业", jp: "米銀行" },
 }
 // 一条标题里的主角（挂历页也用）
 export const entitiesOf = (t: string, lang: Lang): string[] => {
