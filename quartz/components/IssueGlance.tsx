@@ -56,6 +56,7 @@ const ENTITIES: [RegExp, string][] = [
   [/Thinking Machines/, "Thinking Machines"], [/METR/, "METR"], [/Kyutai/, "Kyutai"], [/特朗普|トランプ|Trump/, "US-China"],
   [/诱饵|おとり|bait/, "Dragos"], [/药厂|製薬|drugmakers/, "Pharma"], [/Leumi|レウミ/, "Leumi"], [/西门子|シーメンス|Siemens/, "Siemens"],
   [/OpenRouter/, "OpenRouter"], [/CAA/, "CAA"], [/Muru/, "Muru"], [/数据中心用电|データセンターの電力|data center power/, "Data centers"],
+  [/Grok/, "xAI"], [/新人岗位|新人の採用|entry-level hiring/, "RAISE US"], [/自变量|X Square/, "X Square"], [/韩国|韓国|South Korea/, "Korea"],
 ]
 // 机构名按语言显示
 const LOCAL: Record<string, Partial<Record<Lang, string>>> = {
@@ -69,6 +70,7 @@ const LOCAL: Record<string, Partial<Record<Lang, string>>> = {
   "US-China": { cn: "中美", jp: "米中" },
   Pharma: { cn: "药企", jp: "製薬大手" }, Siemens: { cn: "西门子", jp: "シーメンス" },
   "Data centers": { cn: "数据中心", jp: "データセンター" },
+  "X Square": { cn: "自变量" }, Korea: { cn: "韩国", jp: "韓国" },
 }
 // 一条标题里的主角（挂历页也用）
 export const entitiesOf = (t: string, lang: Lang): string[] => {
