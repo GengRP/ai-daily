@@ -9,7 +9,6 @@ export const sharedPageComponents: SharedLayout = {
   afterBody: [Component.DailyCalendar()],
   footer: Component.Footer({
     links: {
-      "KOUHEI AI": "https://gengrp.github.io/",
       "X @SuperKOUHEi001": "https://x.com/SuperKOUHEi001",
       "AI 入门实践指南": "https://github.com/GengRP/ai-starter-guide",
     },
@@ -19,13 +18,11 @@ export const sharedPageComponents: SharedLayout = {
 // components for pages that display a single page (e.g. a single note)
 export const defaultContentPageLayout: PageLayout = {
   beforeBody: [
-    Component.MobileOnly(Component.HomeLink()),
     // 苹果风：去掉面包屑和标签，标题下面直接是正文
     Component.ArticleTitle(),
     Component.ContentMeta(),
   ],
   left: [
-    Component.DesktopOnly(Component.HomeLink()),
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Flex({
@@ -63,9 +60,8 @@ export const defaultContentPageLayout: PageLayout = {
 
 // components for pages that display lists of pages  (e.g. tags or folders)
 export const defaultListPageLayout: PageLayout = {
-  beforeBody: [Component.MobileOnly(Component.HomeLink()), Component.ArticleTitle(), Component.ContentMeta()],
+  beforeBody: [Component.ArticleTitle(), Component.ContentMeta()],
   left: [
-    Component.DesktopOnly(Component.HomeLink()),
     Component.PageTitle(),
     Component.MobileOnly(Component.Spacer()),
     Component.Flex({
