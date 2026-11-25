@@ -57,6 +57,7 @@ const ENTITIES: [RegExp, string][] = [
   [/诱饵|おとり|bait/, "Dragos"], [/药厂|製薬|drugmakers/, "Pharma"], [/Leumi|レウミ/, "Leumi"], [/西门子|シーメンス|Siemens/, "Siemens"],
   [/OpenRouter/, "OpenRouter"], [/CAA/, "CAA"], [/Muru/, "Muru"], [/数据中心用电|データセンターの電力|data center power/, "Data centers"],
   [/Tidal/, "Tidal"], [/PrismML|Bonsai/, "PrismML"], [/GlanceNav/, "UCF"],
+  [/俄亥俄|オハイオ|Ohio/, "Ohio"], [/纽约时报|ニューヨーク・タイムズ|New York Times/, "NYT"], [/英飞凌|Infineon/, "Infineon"],
   [/Grok/, "xAI"], [/新人岗位|新人の採用|entry-level hiring/, "RAISE US"], [/自变量|X Square/, "X Square"], [/韩国|韓国|South Korea/, "Korea"],
 ]
 // 机构名按语言显示
