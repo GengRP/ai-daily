@@ -57,6 +57,7 @@ const ENTITIES: [RegExp, string][] = [
   [/诱饵|おとり|bait/, "Dragos"], [/药厂|製薬|drugmakers/, "Pharma"], [/Leumi|レウミ/, "Leumi"], [/西门子|シーメンス|Siemens/, "Siemens"],
   [/OpenRouter/, "OpenRouter"], [/CAA/, "CAA"], [/Muru/, "Muru"], [/数据中心用电|データセンターの電力|data center power/, "Data centers"],
   [/Tidal/, "Tidal"], [/PrismML|Bonsai/, "PrismML"], [/GlanceNav/, "UCF"],
+  [/瑞士|スイス|Switzerland/, "Switzerland"], [/MiniMax|Talkie/, "MiniMax"], [/SAP/, "SAP"], [/Neuralink/, "Neuralink"], [/Entangle/, "Entangle"],
   [/俄亥俄|オハイオ|Ohio/, "Ohio"], [/纽约时报|ニューヨーク・タイムズ|New York Times/, "NYT"], [/英飞凌|Infineon/, "Infineon"],
   [/Grok/, "xAI"], [/新人岗位|新人の採用|entry-level hiring/, "RAISE US"], [/自变量|X Square/, "X Square"], [/韩国|韓国|South Korea/, "Korea"],
 ]
@@ -73,6 +74,7 @@ const LOCAL: Record<string, Partial<Record<Lang, string>>> = {
   Pharma: { cn: "药企", jp: "製薬大手" }, Siemens: { cn: "西门子", jp: "シーメンス" },
   "Data centers": { cn: "数据中心", jp: "データセンター" },
   "X Square": { cn: "自变量" }, Korea: { cn: "韩国", jp: "韓国" },
+  Switzerland: { cn: "瑞士", jp: "スイス" },
 }
 // 一条标题里的主角（挂历页也用）
 export const entitiesOf = (t: string, lang: Lang): string[] => {
