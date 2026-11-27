@@ -58,6 +58,7 @@ const ENTITIES: [RegExp, string][] = [
   [/OpenRouter/, "OpenRouter"], [/CAA/, "CAA"], [/Muru/, "Muru"], [/数据中心用电|データセンターの電力|data center power/, "Data centers"],
   [/Tidal/, "Tidal"], [/PrismML|Bonsai/, "PrismML"], [/GlanceNav/, "UCF"],
   [/瑞士|スイス|Switzerland/, "Switzerland"], [/MiniMax|Talkie/, "MiniMax"], [/SAP/, "SAP"], [/Neuralink/, "Neuralink"], [/Entangle/, "Entangle"],
+  [/欧洲央行|欧州中央銀行|ECB/, "ECB"], [/Nielsen/, "Nielsen"], [/Kokotajlo|Dwarkesh/, "Dwarkesh"], [/英国|英国下院|UK Commons/, "UK"],
   [/俄亥俄|オハイオ|Ohio/, "Ohio"], [/纽约时报|ニューヨーク・タイムズ|New York Times/, "NYT"], [/英飞凌|Infineon/, "Infineon"],
   [/Grok/, "xAI"], [/新人岗位|新人の採用|entry-level hiring/, "RAISE US"], [/自变量|X Square/, "X Square"], [/韩国|韓国|South Korea/, "Korea"],
 ]
